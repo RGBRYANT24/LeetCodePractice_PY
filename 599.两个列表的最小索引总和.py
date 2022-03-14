@@ -7,18 +7,21 @@
 # @lc code=start
 class Solution:
     def findRestaurant(self, list1: List[str], list2: List[str]) -> List[str]:
+        index = {s : i for i , s in enumerate(list1)}
         ans = []
-        count_min = 9999
-        for i in range(len(list1)):
-            for j in range(len(list2)):
-                if list1[i] == list2[j]:
-                    if count_min > i + j:
-                        ans = []
-                        ans.append(list1[i])
-                        count_min = i + j
-                    elif count_min == i + j:
-                        ans.append(list1[i])
+        indexSum = inf
+        for i, s in enumerate(list2):
+            if i > indexSum:
+                break
+            if s in index:
+                if i + index[s] < indexSum:
+                    ans = []
+                    ans.append(s)
+                    indexSum = i + index[s]
+                elif i + index[s] == indexSum:
+                    ans.append(s)
         return ans
+
 
 # @lc code=end
 
