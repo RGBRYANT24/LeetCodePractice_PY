@@ -86,7 +86,7 @@ class Solution:
             p.right = node
             p = p.right
 
-
+ 
 
 # @lc code=end
 
