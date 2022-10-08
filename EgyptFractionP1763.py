@@ -7,4 +7,4 @@ def gcd(a, b):
 
 def yf(a: int, b: int):
     tmp = gcd(a, b)
-    
+    return a/tmp, b/tmp
