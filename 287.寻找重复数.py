@@ -7,7 +7,7 @@
 # @lc code=start
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
-        n = len(nums) - 1
+        '''n = len(nums) - 1
         l, r = 1, n + 1
         while l < r:
             mid = l + (r - l) // 2
@@ -19,6 +19,18 @@ class Solution:
                 l = mid + 1
             else:
                 r = mid
-        return l
+        return l'''
+        n = len(nums)
+        slow = fast = 0
+        slow = nums[slow]
+        fast = nums[nums[fast]]
+        while slow != fast:
+            slow = nums[slow]
+            fast = nums[nums[fast]]
+        slow = 0
+        while slow != fast:
+            slow = nums[slow]
+            fast = nums[fast]
+        return slow
 # @lc code=end
 
