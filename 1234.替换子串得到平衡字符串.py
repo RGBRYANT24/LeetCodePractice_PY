@@ -75,16 +75,28 @@
 # @lc code=start
 class Solution:
     def balancedString(self, s: str) -> int:
-        cnt, m = Counter(s), len(s) // 4
-        if all(cnt[x] == m for x in "QWER"):  # 已经符合要求啦
+        cnt = Counter(s)
+        partrial = len(s) // 4
+        def check():
+            if cnt['Q'] > partrial or \
+                cnt['W'] > partrial or \
+                cnt['E'] > partrial or \
+                cnt['R'] > partrial:
+                return False
+            return True
+
+        if check():
             return 0
-        ans, left = inf, 0
-        for right, c in enumerate(s):  # 枚举子串右端点
+        
+        left = 0
+        ans = len(s)
+        for right, c in enumerate(s):
             cnt[c] -= 1
-            while all(cnt[x] <= m for x in "QWER"):
-                ans = min(ans, right - left + 1)
+            while check():
+                ans = min(right - left + 1)
                 cnt[s[left]] += 1
-                left += 1  # 缩小子串
+                left += 1
+    
         return ans
 
 # @lc code=end
