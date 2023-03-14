@@ -34,14 +34,14 @@ l = []
 for i in range(n):
     l.append(list(map(int, input().split())))
 l.sort()
-sum = [0]
-for i in range(n):
-    sum.append(sum[-1] + l[i][1])
+sum = [0] * 1000000
+for i in range(1, n + 1):
+    sum[i] = sum[i - 1] + l[i - 1][1]
 
 key = set({})
 Max = res = 0
-for i in range(n):
-    k = l[i][0]
+for i in range(1, n + 1):
+    k = l[i - 1][0]
     if k in key:
         continue
     key.add(k)
