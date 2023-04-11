@@ -1,17 +1,14 @@
-
 # include <bits/stdc++.h>
 # include <algorithm>
 # define ll long long
 # define re register int
 using namespace std;
 
-// int ans[2000], now[2000];
 long long ans[2000], now[2000];
 long long a, b;
 bool bj = false;
 long long m = 1;
-/*ll a, b, m=1, ans[2000], now[2000];
-bool bj=false;*/
+
 long long gcd(long long a, long long b)
 {
     if(!b)
@@ -27,13 +24,7 @@ void yf(long long &a, long long &b)
     b /= tmp;
     return;
 }
-/*void yf(ll &a, ll &b)
-{
-	int g=gcd(a, b);
-	a/=g;
-	b/=g;
-	return;
-}*/
+
 void dfs(long long x, long long p, long long A, long long B)//待求和的分数是A/B
 {
     long long a = A, b = B;
@@ -60,39 +51,20 @@ void dfs(long long x, long long p, long long A, long long B)//待求和的分数
     for (register int i=p; ceil((double)b*x/a)>=i; i++)
     {
         now[x] = i;
-        //cout << x-1 << " " << i << " " << a * i - b << " " << b * i << " " << a << " " << b << endl;
-        //dfs(x-1, i, a * i - b, b * i);
         dfs(x-1, i, a * i - b, b * i);
-        //system("pause");
     }
-    //system("pause");
     return;
 }
 int main()
 {
     cin>>a>>b;
 	yf(a,b);
-    //memset(ans, sizeof(ans), 0);
-    //memset(now, sizeof(now), 0);
 	while(!bj)
 	{
-        // cout << "in" << endl;
 		dfs(m, 1, a, b);
 		m++;
 	}
 	for(int i=m-1; i>=1;i--)
 		cout<<ans[i]<<" ";
-    //system("pause");
     return 0; 
-    /*cin>>a>>b;
-	yf(a,b);
-	while(!bj)
-	{
-		dfs(m, 1, a, b);
-		m++;
-	}
-	for(re i=m-1;i>=1;i--)
-		cout<<ans[i]<<" ";
-		//system("pause");
-	return 0;*/
 }
