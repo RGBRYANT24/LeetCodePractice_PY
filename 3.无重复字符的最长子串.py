@@ -56,18 +56,19 @@
 # @lc code=start
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        n = len(s)
-        ans_set = set()
+        d = {}
+        i, j = 0, 0
         ans = 0
-        rk = -1
-        for i in range(len(s)):
-            if i != 0: # 如果i不是第一个 就把前一位的字符从集合中移除
-                ans_set.remove(s[i-1])
-            while rk + 1 < n and s[rk + 1] not in ans_set:
-                ans_set.add(s[rk + 1])
-                rk += 1 # 右指针右移
-            
-            ans = max(ans, rk - i +1)
+        n = len(s)
+        while j < n:
+            if s[j] not in d or d[s[j]] < i:
+                # print(i, j)
+                ans = max(j - i + 1, ans)
+                d[s[j]] = j
+            else:
+                i = d[s[j]] + 1
+                d[s[j]] = j
+            j += 1
         return ans 
                 
 
