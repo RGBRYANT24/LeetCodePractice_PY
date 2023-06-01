@@ -7,17 +7,14 @@
 # @lc code=start
 class Solution:
     def isValid(self, s: str) -> bool:
-        d = {'(' : ')', '[' : ']', '{' : '}'}
-        stk = []
+        d = {'}':'{', ']':'[', ')':'(' , '?':'?'}
+        # print(d.keys(), '(' in d)
+        stk = ['?']
         for c in s:
-            # print(stk)
-            if c in d:
+            if not c in d:
                 stk.append(c)
-                continue
-            elif len(stk) > 0 and d[stk.pop()] == c:
-                continue
-            return False
-            
-        return True if len(stk) == 0 else False
+            elif stk.pop() != d[c]:
+                return False
+        return len(stk) == 1
 # @lc code=end
 
