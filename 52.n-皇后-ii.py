@@ -51,11 +51,16 @@
 # @lc code=start
 class Solution:
     def totalNQueens(self, n: int) -> int:
+        global ans 
+        ans = 0
         def backtrack(row):
+            global ans
             if row == n:
-                return 1
+                # print('in')
+                ans += 1
+                return 
             else:
-                ans = 0
+                # ans = 0
                 for i in range(n):
                     if i + row in diag1 or row - i in diag2 or i in col:
                         continue
@@ -63,17 +68,21 @@ class Solution:
                     diag2.add(row - i)
                     col.add(i)
                     queens[row] = i
-                    ans += backtrack(row + 1)
+                    # ans += backtrack(row + 1)
+                    backtrack(row + 1)
                     diag1.remove(i + row)
                     diag2.remove(row - i)
                     col.remove(i)
-                return ans
+                # return ans
+                return
 
         diag1 = set()
         diag2 = set()
         col = set()
         queens = [-1] * n
-        return backtrack(0)
+        backtrack(0)
+        # return backtrack(0)
+        return ans
 
 # @lc code=end
 
